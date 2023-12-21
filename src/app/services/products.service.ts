@@ -8,11 +8,17 @@ import { Product } from './../models/product.model';
 })
 export class ProductsService {
 
+  baseUrl = 'https://api.escuelajs.co/api/v1/products';
+
   constructor(
     private http: HttpClient
   ) { }
 
   getAllProducts() {
-    return this.http.get<Product[]>('https://api.escuelajs.co/api/v1/products');
+    return this.http.get<Product[]>(this.baseUrl);
+  }
+
+  getProductById(idProduct: number) {
+    return this.http.get<Product>(`${this.baseUrl}/${idProduct}`)
   }
 }

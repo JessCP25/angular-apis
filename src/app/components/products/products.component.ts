@@ -40,4 +40,11 @@ export class ProductsComponent implements OnInit {
     this.showProductDetail = !this.showProductDetail;
   }
 
+  onShowDetail(idProduct: number) {
+    this.productsService.getProductById(idProduct)
+      .subscribe(res => {
+        console.log(res);
+      })
+  }
+
 }
