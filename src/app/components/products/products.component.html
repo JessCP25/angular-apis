@@ -1,4 +1,3 @@
-<button (click)="toggleProductDetail()">click</button>
 <div class="products--grid">
   <app-product
     (showProduct)="onShowDetail($event)"
@@ -17,6 +16,7 @@
           <img [src]="img" [alt]="">
         </ng-template>
       </swiper>
+      <p class="d-title">Description: </p>
       <p> {{productChosen.description}} </p>
     </div>
   </div>

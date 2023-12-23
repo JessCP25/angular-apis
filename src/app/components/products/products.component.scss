@@ -18,6 +18,36 @@
   &.active {
     transform: translateX(0);
   }
+  div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    button{
+      background-color: var(--green-light);
+      border: none;
+      color: white;
+      align-self: flex-end;
+      padding: 8px 15px;
+      border-radius: 8px;
+    }
+    h1{
+      text-align: center;
+      font-weight: bolder;
+    }
+    swiper{
+      width: 100%;
+      img{
+        width: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+    }
+    .d-title{
+      font-weight: bold;
+      color: var(--green-light);
+    }
+  }
 }
 
 // tablets
