@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Product } from '../../models/product.model';
+import { CreateProductDTO, Product } from '../../models/product.model';
 
 import { StoreService } from '../../services/store.service';
 import { ProductsService } from '../../services/products.service';
@@ -47,6 +47,34 @@ export class ProductsComponent implements OnInit {
         this.toggleProductDetail();
         this.productChosen = res;
       })
+  }
+
+  createNewProduct() {
+    const product: CreateProductDTO = {
+      title: 'iPhone 15',
+      description: 'Chip A17 Pro con GPU de 6 núcleos · Sistema de cámaras Pro. Nuestra cámara gran angular de 48 MP más avanzada. Cámara teleobjetivo de 3x',
+      price: 1039,
+      images: [
+        'https://mac-center.com.pe/cdn/shop/files/iPhone_15_Pro_Black_Titanium_PDP_Image_Position-1__COES_823x.jpg?v=1695213981',
+        'https://tiendasishop.com/media/catalog/product/i/p/iphone15_black_pdp_image_position-1__coes.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700',
+        'https://mac-center.com.pe/cdn/shop/files/iPhone_15_Pro_Max_Natural_Titanium_PDP_Image_Position-1__COES_823x.jpg?v=1695213371'
+      ],
+      categoryId: 2
+    }
+    this.productsService.create(product).subscribe(data => {
+      this.products.unshift(data);
+    })
+  }
+
+  updateProduct(){
+    const change = {
+      title: 'IPhone 15 Pro'
+    }
+    this.productsService.update(this.productChosen.id, change).subscribe(data =>{
+      const productIndex = this.products.findIndex(product => product.id === this.productChosen.id);
+      this.products[productIndex] = data;
+      this.productChosen = data;
+    })
   }
 
 }

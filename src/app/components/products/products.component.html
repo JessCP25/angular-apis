@@ -1,4 +1,5 @@
 <div class="products--grid">
+  <button (click)="createNewProduct()">Create</button>
   <app-product
     (showProduct)="onShowDetail($event)"
     [product]="product"
@@ -16,6 +17,7 @@
           <img [src]="img" [alt]="">
         </ng-template>
       </swiper>
+      <button (click)="updateProduct()">Edit</button>
       <p class="d-title">Description: </p>
       <p> {{productChosen.description}} </p>
     </div>
