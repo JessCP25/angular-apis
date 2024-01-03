@@ -17,6 +17,8 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
   showProductDetail = false;
   productChosen!: Product;
+  limit = 10;
+  offset = 0;
 
   constructor(
     private storeService: StoreService,
@@ -26,9 +28,14 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productsService.getAllProducts()
+    this.getAllProducts();
+  }
+
+  getAllProducts(){
+    this.productsService.getAllProducts(10, 0)
     .subscribe(data => {
       this.products = data;
+      this.offset += this.limit;
     });
   }
 
@@ -82,6 +89,13 @@ export class ProductsComponent implements OnInit {
       const productIndex = this.products.findIndex(product => product.id === this.productChosen.id);
       this.products.splice(productIndex, 1);
       this.showProductDetail = false;
+    })
+  }
+
+  loadMore(){
+    this.productsService.getAllProducts(this.limit, this.offset).subscribe(data => {
+      this.products = this.products.concat(data);
+      this.offset += this.limit;
     })
   }
 

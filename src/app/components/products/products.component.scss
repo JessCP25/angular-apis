@@ -44,6 +44,11 @@
         border-radius: 8px;
       }
     }
+    .btn_content {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
     .d-title{
       font-weight: bold;
       color: var(--green-light);
