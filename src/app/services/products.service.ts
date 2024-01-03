@@ -29,4 +29,8 @@ export class ProductsService {
   update(idProduct: number, dto: any) {
     return this.http.put<Product>(`${this.baseUrl}/${idProduct}`, dto);
   }
+
+  delete(idProduct: number){
+    return this.http.delete<boolean>(`${this.baseUrl}/${idProduct}`);
+  }
 }

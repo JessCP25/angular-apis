@@ -17,7 +17,10 @@
           <img [src]="img" [alt]="">
         </ng-template>
       </swiper>
-      <button (click)="updateProduct()">Edit</button>
+      <div class="flex justify-between">
+        <button (click)="updateProduct()">Edit</button>
+        <button (click)="deleteProduct()">Delete</button>
+      </div>
       <p class="d-title">Description: </p>
       <p> {{productChosen.description}} </p>
     </div>
