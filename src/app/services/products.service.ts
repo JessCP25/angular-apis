@@ -9,7 +9,7 @@ import { retry } from 'rxjs';
 })
 export class ProductsService {
 
-  baseUrl = 'https://api.escuelajs.co/api/v1/products';
+  baseUrl = '/api/v1/products';
 
   constructor(
     private http: HttpClient
