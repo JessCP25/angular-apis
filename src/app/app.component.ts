@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
 import { Product } from './models/product.model';
+import { UsersService } from './services/users.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,7 @@ export class AppComponent {
   imgParent = '';
   showImg = true;
 
+  constructor(private usersService: UsersService, private authService: AuthService) {}
 
   onLoaded(img: string) {
     console.log('log padre', img);
@@ -18,5 +21,24 @@ export class AppComponent {
 
   toggleImg() {
     this.showImg = !this.showImg;
+  }
+
+  createUser() {
+    this.usersService.create({
+      name: 'Jessica',
+      email: 'jessica@gmail.com',
+      password: '12345',
+      avatar: 'https://i.pinimg.com/564x/e9/9b/0a/e99b0a26d6709288ecb8f5ba212305a4.jpg'
+    })
+    .subscribe(rta => {
+      console.log(rta);
+    })
+  }
+
+  login() {
+    this.authService.login('jessica@gmail.com', '12345')
+    .subscribe(rta => {
+      console.log(rta.access_token);
+    })
   }
 }
