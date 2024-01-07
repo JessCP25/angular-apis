@@ -7,6 +7,7 @@ export interface Product {
   creationAt?:  Date;
   updatedAt?:   Date;
   category?:    Category;
+  taxes?: number;
 }
 
 export interface Category {
