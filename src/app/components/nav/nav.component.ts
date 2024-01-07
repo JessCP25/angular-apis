@@ -46,7 +46,7 @@ export class NavComponent implements OnInit {
   }
 
   getProfile(token: string) {
-    this.authService.profile(token)
+    this.authService.profile()
     .subscribe(profile => {
       console.log(profile);
       this.email = profile.email;
