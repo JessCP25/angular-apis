@@ -36,7 +36,11 @@
       </ul>
     </nav>
     <div class="info">
-      <div class="account">nicolas@nicolas.com</div>
+      <button *ngIf="!email; else notToken" (click)="loginAndProfile()">Login</button>
+      <ng-template #notToken>
+        <div class="account"> {{email}} </div>
+      </ng-template>
+
       <div class="cart">
         <a href="">
           <img src="./assets/svg/icon_shopping_cart.svg" alt="logo">
