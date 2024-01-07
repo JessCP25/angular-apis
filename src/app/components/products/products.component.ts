@@ -4,6 +4,7 @@ import { CreateProductDTO, Product } from '../../models/product.model';
 
 import { StoreService } from '../../services/store.service';
 import { ProductsService } from '../../services/products.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -56,6 +57,21 @@ export class ProductsComponent implements OnInit {
         console.log(error);
       },
     });
+  }
+
+  readAndUpdate(idProduct: number) {
+    this.productsService.getProductById(idProduct)
+    .pipe(
+      switchMap((product)=> this.productsService.update(product.id, {title: 'change'}))
+    )
+    .subscribe(data => {
+      console.log(data)
+    });
+    this.productsService.fetchReandAndUpdate(idProduct, {title: 'nuevo'})
+    .subscribe(response => {
+      const read = response[0];
+      const update = response[1]
+    })
   }
 
   createNewProduct() {
