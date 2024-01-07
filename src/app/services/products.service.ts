@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http';
 
 import { CreateProductDTO, Product } from './../models/product.model';
-import { retry } from 'rxjs';
+import { catchError, retry, throwError } from 'rxjs';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -30,6 +30,20 @@ export class ProductsService {
 
   getProductById(idProduct: number) {
     return this.http.get<Product>(`${this.baseUrl}/${idProduct}`)
+    .pipe(
+      catchError((error: HttpErrorResponse)=>{
+        if(error.status === HttpStatusCode.Conflict){
+          return throwError(()=> new Error('Algo esta fallando en el servidor.'))
+        }
+        if(error.status === HttpStatusCode.NotFound){
+          return throwError(()=> new Error('El producto no existe'));
+        }
+        if(error.status === HttpStatusCode.Unauthorized){
+          return throwError(()=> new Error('No estas permitido'))
+        }
+        return throwError(()=> new Error('Ups algo salio mal'))
+      })
+    )
   }
 
   create(dto: CreateProductDTO) {
